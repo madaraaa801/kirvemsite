@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kanat Çırpışı - HAVEN</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #0f1123;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      overflow-x: hidden;
+    }
+
+    nav {
+      margin-bottom: 1rem;
+    }
+
+    nav a {
+      color: #00f0ff;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 10px;
+      font-size: 1rem;
+    }
+
+    h1 {
+      margin-bottom: 0.5rem;
+    }
+
+    #scoreBox {
+      margin-bottom: 1rem;
+    }
+
+    #score, #highscore {
+      font-size: 1.1rem;
+      margin: 5px;
+    }
+
+    #startBtn {
+      padding: 10px 20px;
+      font-size: 1rem;
+      border: none;
+      background-color: #00f0ff;
+      color: black;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-bottom: 1rem;
+    }
+
+    canvas {
+      background-color: #1a1c33;
+      border-radius: 20px;
+      border: 2px solid white;
+      display: block;
+      margin: 0 auto;
+      max-width: 90vw;
+      max-height: 90vw;
+      width: 90vw;
+      height: 90vw;
+    }
+
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: white;
+      font-size: 1em;
+      animation: fall linear infinite;
+      pointer-events: none;
+      user-select: none;
+      z-index: -1;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100vh); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">Ana Sayfa</a>
+    <a href="team.html">Yetkili Ekibi</a>
+  </nav>
+
+  <h1>🎮 Kanat Çırpışı</h1>
+
+  <div id="scoreBox">
+    <div id="score">Skor: 0</div>
+    <div id="highscore">En Yüksek Skor: 0</div>
+  </div>
+
+  <button id="startBtn">Başla</button>
+  <canvas id="gameCanvas" width="400" height="400"></canvas>
+
+  <script>
+    // Kar efektleri (arka planda)
+    function createSnow() {
+      for (let i = 0; i < 40; i++) {
+        let flake = document.createElement("div");
+        flake.className = "snowflake";
+        flake.innerHTML = "❄";
+        flake.style.left = Math.random() * window.innerWidth + "px";
+        flake.style.animationDuration = (2 + Math.random() * 3) + "s";
+        flake.style.fontSize = (10 + Math.random() * 20) + "px";
+        document.body.appendChild(flake);
+      }
+    }
+    createSnow();
+
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    let gameRunning = false;
+    let score = 0;
+    let highScore = parseInt(localStorage.getItem("highScore")) || 0;
+    let ball, pipes;
+
+    document.getElementById("highscore").textContent = "En Yüksek Skor: " + highScore;
+
+    function resetGame() {
+      score = 0;
+      pipes = [];
+      ball = { x: 80, y: 150, radius: 15, gravity: 0.5, lift: -10, velocity: 0 };
+      document.getElementById("score").textContent = "Skor: 0";
+    }
+
+    function drawBall() {
+      ctx.beginPath();
+      ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+      ctx.fillStyle = "red";
+      ctx.fill();
+      ctx.closePath();
+    }
+
+    function drawPipes() {
+      ctx.fillStyle = "#00ffcc";
+      pipes.forEach(pipe => {
+        ctx.fillRect(pipe.x, 0, 50, pipe.top);
+        ctx.fillRect(pipe.x, pipe.top + 100, 50, canvas.height - pipe.top - 100);
+      });
+    }
+
+    function updatePipes() {
+      pipes.forEach(pipe => {
+        pipe.x -= 2;
+        if (!pipe.passed && ball.x > pipe.x + 50) {
+          pipe.passed = true;
+          score++;
+          document.getElementById("score").textContent = "Skor: " + score;
+          if (score > highScore) {
+            highScore = score;
+            localStorage.setItem("highScore", highScore);
+            document.getElementById("highscore").textContent = "En Yüksek Skor: " + highScore;
+          }
+        }
+        if (ball.x + ball.radius > pipe.x &&
+            ball.x - ball.radius < pipe.x + 50 &&
+            (ball.y - ball.radius < pipe.top || ball.y + ball.radius > pipe.top + 100)) {
+          gameRunning = false;
+        }
+      });
+
+      if (pipes.length === 0 || pipes[pipes.length - 1].x < canvas.width - 150) {
+        let top = Math.random() * (canvas.height - 200) + 30;
+        pipes.push({ x: canvas.width, top: top, passed: false });
+      }
+
+      if (pipes[0].x < -50) pipes.shift();
+    }
+
+    function updateBall() {
+      ball.velocity += ball.gravity;
+      ball.y += ball.velocity;
+      if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) {
+        gameRunning = false;
+      }
+    }
+
+    function drawGameOver() {
+      ctx.fillStyle = "white";
+      ctx.font = "24px Arial";
+      ctx.fillText("Oyun Bitti", canvas.width / 2 - 60, canvas.height / 2);
+    }
+
+    function gameLoop() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (gameRunning) {
+        drawBall();
+        drawPipes();
+        updateBall();
+        updatePipes();
+        requestAnimationFrame(gameLoop);
+      } else {
+        drawBall();
+        drawPipes();
+        drawGameOver();
+      }
+    }
+
+    function startGame() {
+      resetGame();
+      gameRunning = true;
+      gameLoop();
+    }
+
+    document.getElementById("startBtn").addEventListener("click", startGame);
+    document.addEventListener("click", () => {
+      if (gameRunning) ball.velocity = ball.lift;
+    });
+    document.addEventListener("keydown", e => {
+      if (e.code === "Space" && gameRunning) {
+        ball.velocity = ball.lift;
+      }
+    });
+  </script>
+
+</body>
+</html>
