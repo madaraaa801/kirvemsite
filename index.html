@@ -41,6 +41,7 @@
       animation: fall linear infinite;
       user-select: none;
       pointer-events: none;
+      z-index: 9999;
     }
 
     @keyframes fall {
@@ -76,7 +77,6 @@
       background-color: #555;
     }
 
-    /* Özellikler bölümü */
     .features {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -84,6 +84,12 @@
       padding: 2rem 1rem 3rem 1rem;
       max-width: 900px;
       margin: 0 auto 3rem auto;
+    }
+
+    .features a.feature-box {
+      display: block;
+      text-decoration: none;
+      color: white;
     }
 
     .feature-box {
@@ -94,6 +100,11 @@
       font-weight: bold;
       font-size: 1.1rem;
       user-select: none;
+      transition: background-color 0.3s;
+    }
+
+    .feature-box:hover {
+      background-color: #2b2d44;
     }
   </style>
 </head>
@@ -129,10 +140,10 @@
 
   <!-- ÖZELLİKLER -->
   <section class="features">
-    <div class="feature-box">Ana sunucu linki</div>
-    <div class="feature-box">Yan sunucu linki</div>
+    <a href="https://discord.gg/seninlinkin1" target="_blank" class="feature-box">Ana sunucu linki</a>
+    <a href="https://discord.gg/seninlinkin2" target="_blank" class="feature-box">Yan sunucu linki</a>
     <div class="feature-box">Mini game unutma!</div>
-    <div class="feature-box">Yetkili ekibini kontrol et ❤️</div>
+    <a href="team.html" class="feature-box">Yetkili ekibini kontrol et ❤️</a>
   </section>
 
 </body>
