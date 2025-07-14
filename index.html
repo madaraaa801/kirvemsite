@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>HAVEN #BAŞLANGIÇ</title>
+  <title>KİRVEM-STUDİO</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>
   <style>
     * { box-sizing: border-box; }
@@ -19,12 +19,28 @@
       text-align: center;
     }
 
+    .robot-head {
+      display: inline-block;
+      animation: headShake 3s infinite ease-in-out;
+      font-size: 1.5rem;
+      user-select: none;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    @keyframes headShake {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
     .snowflake {
       position: fixed;
       top: -10px;
       color: white;
       font-size: 1em;
       animation: fall linear infinite;
+      user-select: none;
+      pointer-events: none;
     }
 
     @keyframes fall {
@@ -38,6 +54,7 @@
       justify-content: center;
       gap: 1rem;
       margin-bottom: 2rem;
+      padding: 0 1rem;
     }
 
     .buttons a {
@@ -48,64 +65,16 @@
       color: white;
       background-color: #333;
       cursor: pointer;
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1rem;
-      padding: 2rem;
-    }
-
-    .feature-box {
-      background-color: #1a1c33;
-      padding: 1rem;
-      border-radius: 10px;
-    }
-
-    .team {
-      padding: 2rem;
-    }
-
-    .team-members {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
-    }
-
-    .member {
+      user-select: none;
+      transition: background-color 0.3s;
+      display: inline-block;
       text-align: center;
-      background-color: #1a1c33;
-      padding: 1rem;
-      border-radius: 10px;
+      min-width: 150px;
     }
 
-    .member img {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      border: 2px solid #00f0ff;
-      margin-bottom: 1rem;
+    .buttons a:hover {
+      background-color: #555;
     }
-
-    #game-section {
-      margin-top: 60px;
-      text-align: center;
-    }
-
-    canvas {
-      display: block;
-      margin: 20px auto;
-      background-color: #1a1c33;
-      border: 2px solid #fff;
-    }
-
-    #score {
-      color: white;
-      font-family: Arial, sans-serif;
-      font-size: 20px;
-    }
-
   </style>
 </head>
 <body>
@@ -128,129 +97,15 @@
 
   <!-- BAŞLIK -->
   <header>
-    <h1>🤖 HAVEN #BAŞLANGIÇ</h1>
-    <p>Haven sunucusu bilgilendirme sitesi</p>
+    <h1><span class="robot-head">🤖</span> KİRVEM-STUDİO </h1>
+    <p>Kirvem studio bilgilendirme</p>
   </header>
 
   <!-- BUTONLAR -->
   <div class="buttons">
-    <a>ERKAN HOCAM ❤️</a>
-    <a>Bot Komutları</a>
-    <a>Yetkili Ekibi (Kadro)</a>
-    <a onclick="document.getElementById('game-section').scrollIntoView({ behavior: 'smooth' });">Kanat Çırpışı</a>
+    <a href="team.html">Yetkili Ekibi (Kadro)</a>
+    <a href="game.html">Kanat Çırpışı</a>
   </div>
 
-  <!-- ÖZELLİKLER -->
-  <section>
-    <h2 style="text-align:center;">Features</h2>
-    <div class="features">
-      <div class="feature-box">Ana sunucu linki</div>
-      <div class="feature-box">Yan sunucu linki</div>
-      <div class="feature-box">Mini game unutma!</div>
-      <div class="feature-box">Yetkili ekibini kontrol et ❤️</div>
-    </div>
-  </section>
-
-  <!-- EKİP -->
-  <section class="team">
-    <h2 style="text-align:center;">Development Team</h2>
-    <div class="team-members">
-      <div class="member"><img src="https://via.placeholder.com/80"><h3>Madara (Ali)</h3><p>Kurucu</p></div>
-      <div class="member"><img src="https://via.placeholder.com/80"><h3>Zero</h3><p>Ortak</p></div>
-      <div class="member"><img src="https://via.placeholder.com/80"><h3>Martini</h3><p>Partner</p></div>
-      <div class="member"><img src="https://via.placeholder.com/80"><h3>san9c</h3><p>Moderatör</p></div>
-      <div class="member"><img src="https://via.placeholder.com/80"><h3>Valeriano</h3><p>Stajyer</p></div>
-      <div class="member"><img src="https://via.placeholder.com/80"><h3>Aylinnur</h3><p>Kurucu/2</p></div>
-    </div>
-  </section>
-
-  <!-- OYUN -->
-  <section id="game-section">
-    <h2>🎮 Kanat Çırpışı</h2>
-    <div id="score">Skor: 0</div>
-    <canvas id="gameCanvas" width="400" height="600"></canvas>
-  </section>
-
-  <!-- OYUN SCRIPT -->
-  <script>
-    const canvas = document.getElementById("gameCanvas");
-    const ctx = canvas.getContext("2d");
-
-    let ball = { x: 80, y: 150, radius: 15, color: "red", gravity: 0.5, lift: -10, velocity: 0 };
-    let pipes = [];
-    let pipeWidth = 50, pipeGap = 150;
-    let score = 0, gameOver = false;
-
-    function drawBall() {
-      ctx.beginPath();
-      ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
-      ctx.fillStyle = ball.color;
-      ctx.fill();
-      ctx.closePath();
-    }
-
-    function drawPipes() {
-      ctx.fillStyle = "#00ffcc";
-      pipes.forEach(pipe => {
-        ctx.fillRect(pipe.x, 0, pipeWidth, pipe.top);
-        ctx.fillRect(pipe.x, pipe.top + pipeGap, pipeWidth, canvas.height - pipe.top - pipeGap);
-      });
-    }
-
-    function updatePipes() {
-      pipes.forEach(pipe => {
-        pipe.x -= 2;
-        if (!pipe.passed && ball.x > pipe.x + pipeWidth) {
-          pipe.passed = true;
-          score++;
-          document.getElementById("score").textContent = "Skor: " + score;
-        }
-        if (ball.x + ball.radius > pipe.x &&
-            ball.x - ball.radius < pipe.x + pipeWidth &&
-            (ball.y - ball.radius < pipe.top || ball.y + ball.radius > pipe.top + pipeGap)) {
-          gameOver = true;
-        }
-      });
-
-      if (pipes.length === 0 || pipes[pipes.length - 1].x < 250) {
-        let top = Math.random() * (canvas.height - pipeGap - 100) + 50;
-        pipes.push({ x: canvas.width, top: top, passed: false });
-      }
-
-      if (pipes.length > 0 && pipes[0].x < -pipeWidth) pipes.shift();
-    }
-
-    function updateBall() {
-      ball.velocity += ball.gravity;
-      ball.y += ball.velocity;
-      if (ball.y + ball.radius > canvas.height || ball.y - ball.radius < 0) gameOver = true;
-    }
-
-    function drawGameOver() {
-      ctx.fillStyle = "white";
-      ctx.font = "32px Arial";
-      ctx.fillText("Oyun Bitti", canvas.width / 2 - 80, canvas.height / 2);
-    }
-
-    function gameLoop() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      if (!gameOver) {
-        drawBall();
-        drawPipes();
-        updateBall();
-        updatePipes();
-        requestAnimationFrame(gameLoop);
-      } else {
-        drawGameOver();
-      }
-    }
-
-    document.addEventListener("click", () => {
-      if (!gameOver) ball.velocity = ball.lift;
-    });
-
-    gameLoop();
-  </script>
-
 </body>
-                                                                                               </html>
+</html>
