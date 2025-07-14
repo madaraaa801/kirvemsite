@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>İletişim - KİRVEM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #0f1123;
+      color: white;
+      padding: 2rem 1rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      padding: 10px 20px;
+      border-radius: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      color: white;
+      background-color: #333;
+      transition: background-color 0.3s;
+      min-width: 140px;
+      text-align: center;
+    }
+
+    nav a:hover {
+      background-color: #555;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .info-box {
+      max-width: 700px;
+      background-color: #1a1c33;
+      margin: 0 auto 2rem auto;
+      padding: 1.5rem;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .discord-contact {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-top: 1rem;
+      background-color: #23263a;
+      padding: 1rem;
+      border-radius: 10px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .discord-contact img {
+      width: 28px;
+      height: 28px;
+    }
+
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: white;
+      font-size: 1em;
+      animation: fall linear infinite;
+      user-select: none;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100vh); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- KAR EFEKTI -->
+  <script>
+    const snow = () => {
+      for (let i = 0; i < 40; i++) {
+        let flake = document.createElement("div");
+        flake.className = "snowflake";
+        flake.innerHTML = "❄";
+        flake.style.left = Math.random() * window.innerWidth + "px";
+        flake.style.animationDuration = (2 + Math.random() * 3) + "s";
+        flake.style.fontSize = (10 + Math.random() * 20) + "px";
+        document.body.appendChild(flake);
+      }
+    };
+    snow();
+  </script>
+
+  <!-- ÜST MENÜ -->
+  <nav>
+    <a href="index.html">Ana Sayfa</a>
+    <a href="team.html">Yetkili Ekibi</a>
+    <a href="game.html">Kanat Çırpışı</a>
+    <a href="iletisim.html">İletişim</a>
+  </nav>
+
+  <h1>📬 İletişim</h1>
+
+  <div class="info-box">
+    Merhaba, ben <strong>Wegh</strong>. Bu sunucunun kurucusuyum.  
+    Görüşlerinizi ve önerilerinizi benimle paylaşmak isterseniz, aşağıdaki Discord adresimden bana ulaşabilirsiniz.
+  </div>
+
+  <div class="discord-contact">
+    <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord Logo">
+    Discord İsmim: <span style="color:#00f0ff;">Wegh#1234</span> <!-- Burayı sen değiştirirsin -->
+  </div>
+
+</body>
+</html>
