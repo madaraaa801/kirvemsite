@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yetkili Ekibi - HAVEN</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #0f1123;
+      color: white;
+      padding: 2rem;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .team-members {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .member {
+      background-color: #1a1c33;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .member img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid #00f0ff;
+      margin-bottom: 1rem;
+    }
+
+    nav {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    nav a {
+      color: #00f0ff;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 10px;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #0ff;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">Ana Sayfa</a>
+    <a href="game.html">Kanat Çırpışı</a>
+  </nav>
+
+  <h1>Yetkili Ekibi (Kadro)</h1>
+
+  <div class="team-members">
+    <div class="member"><img src="https://via.placeholder.com/80" alt="Madara (Ali)"><h3>Wegh</h3><p>Tasarımcı</p></div>
+    <div class="member"><img src="https://via.placeholder.com/80" alt="Zero"><h3>x7l4</h3><p>Tasarımcı</p></div>
+    <div class="member"><img src="https://via.placeholder.com/80" alt="Martini"><h3>lol</h3><p>Tasarımcı</p></div>
+  </div>
+
+</body>
+</html>
