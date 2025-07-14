@@ -75,6 +75,28 @@
       height: 28px;
     }
 
+    .discord-contact button {
+      background: none;
+      border: none;
+      color: #00f0ff;
+      font-size: 1.2rem;
+      cursor: pointer;
+      font-weight: bold;
+      padding: 0;
+    }
+
+    .discord-contact button:hover {
+      text-decoration: underline;
+    }
+
+    .copy-alert {
+      text-align: center;
+      color: #00ffcc;
+      font-weight: bold;
+      margin-top: 10px;
+      display: none;
+    }
+
     .snowflake {
       position: fixed;
       top: -10px;
@@ -115,6 +137,7 @@
     <a href="index.html">Ana Sayfa</a>
     <a href="team.html">Yetkili Ekibi</a>
     <a href="game.html">Kanat Çırpışı</a>
+    <a href="iletisim.html">İletişim</a>
   </nav>
 
   <h1>📬 İletişim</h1>
@@ -126,8 +149,25 @@
 
   <div class="discord-contact">
     <img src="https://cdn-icons-png.flaticon.com/512/5968/5968756.png" alt="Discord Logo">
-    Discord İsmim: <span style="color:#00f0ff;">weghcx</span> <!-- Burayı sen değiştirirsin -->
+    <button onclick="copyDiscord()" id="discordName">weghcx</button>
   </div>
+
+  <div id="copyAlert" class="copy-alert">Kopyalandı!</div>
+
+  <script>
+    function copyDiscord() {
+      const discordTag = document.getElementById("discordName").textContent;
+      navigator.clipboard.writeText(discordTag).then(() => {
+        const alertBox = document.getElementById("copyAlert");
+        alertBox.style.display = "block";
+        setTimeout(() => {
+          alertBox.style.display = "none";
+        }, 2000);
+      }).catch(() => {
+        alert("Kopyalama başarısız.");
+      });
+    }
+  </script>
 
 </body>
 </html>
