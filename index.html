@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>KİRVEM-STUDİO</title>
+  <title>HAVEN #BAŞLANGIÇ</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>
   <style>
     * { box-sizing: border-box; }
@@ -75,6 +75,26 @@
     .buttons a:hover {
       background-color: #555;
     }
+
+    /* Özellikler bölümü */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      padding: 2rem 1rem 3rem 1rem;
+      max-width: 900px;
+      margin: 0 auto 3rem auto;
+    }
+
+    .feature-box {
+      background-color: #1a1c33;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.1rem;
+      user-select: none;
+    }
   </style>
 </head>
 <body>
@@ -97,15 +117,25 @@
 
   <!-- BAŞLIK -->
   <header>
-    <h1><span class="robot-head">🤖</span> KİRVEM-STUDİO </h1>
-    <p>Kirvem studio bilgilendirme</p>
+    <h1><span class="robot-head">🤖</span> HAVEN #BAŞLANGIÇ</h1>
+    <p>Haven sunucusu bilgilendirme sitesi</p>
   </header>
 
   <!-- BUTONLAR -->
   <div class="buttons">
+    <a href="#">ERKAN HOCAM ❤️</a>
+    <a href="#">Bot Komutları</a>
     <a href="team.html">Yetkili Ekibi (Kadro)</a>
     <a href="game.html">Kanat Çırpışı</a>
   </div>
+
+  <!-- ÖZELLİKLER -->
+  <section class="features">
+    <div class="feature-box">Ana sunucu linki</div>
+    <div class="feature-box">Yan sunucu linki</div>
+    <div class="feature-box">Mini game unutma!</div>
+    <div class="feature-box">Yetkili ekibini kontrol et ❤️</div>
+  </section>
 
 </body>
 </html>
