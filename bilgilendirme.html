@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yetkili Ekibi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #0f1123;
+      color: white;
+      padding: 2rem;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+      user-select: none;
+    }
+
+    .team-members {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .member {
+      background-color: #1a1c33;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+      user-select: none;
+    }
+
+    nav {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    nav a {
+      color: #00f0ff;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 0 10px;
+      font-size: 1rem;
+      transition: color 0.3s;
+      user-select: none;
+    }
+
+    nav a:hover {
+      color: #0ff;
+    }
+
+    /* Kar efekti */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: white;
+      font-size: 1em;
+      animation: fall linear infinite;
+      user-select: none;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(100vh); }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">Ana Sayfa</a>
+    <a href="game.html">Kanat Çırpışı</a>
+    <a href="iletisim.html">İletişim</a>
+  </nav>
+
+  <h1>Yetkili Ekibi (Kadro)</h1>
+
+  <div class="team-members">
+    <div class="member"><h3>Wegh</h3><p>Tasarımcı</p></div>
+    <div class="member"><h3>x7l4</h3><p>Tasarımcı</p></div>
+    <div class="member"><h3>lol</h3><p>Tasarımcı</p></div>
+  </div>
+
+  <script>
+    const snow = () => {
+      for (let i = 0; i < 40; i++) {
+        let flake = document.createElement("div");
+        flake.className = "snowflake";
+        flake.innerHTML = "❄";
+        flake.style.left = Math.random() * window.innerWidth + "px";
+        flake.style.animationDuration = (2 + Math.random() * 3) + "s";
+        flake.style.fontSize = (10 + Math.random() * 20) + "px";
+        document.body.appendChild(flake);
+      }
+    };
+    snow();
+  </script>
+
+</body>
+</html>
