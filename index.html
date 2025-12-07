@@ -149,22 +149,10 @@
   </section>
 
   <!-- ARKA PLAN MÜZİK -->
-  <audio id="player" autoplay muted loop style="display:none;">
-    <source src="LVBEL C5 - Aşkım Çok Pardon (Mahmud Beatz Remix) _ Tamponu Yere Bastırdım (EMHeQm5U2kw).m4a" type="audio/mp4">
-  </audio>
-
-  <script>
-  // Sayfa tamamen yüklenince çalışır
-  window.addEventListener("load", () => {
-      const p = document.getElementById("player");
-
-      // Kullanıcı ekrana 1 kez dokununca sesi aç
-      document.addEventListener("click", () => {
-          p.muted = false;
-          p.play();
-      }, { once: true });
-  });
-  </script>
-
+  <audio src="LVBEL C5 - Aşkım Çok Pardon (Mahmud Beatz Remix) _ Tamponu Yere Bastırdım (_EMHeQm5U2kw_).m4a"
+  controls
+  autoplay
+  loop 
+></audio>
 </body>
 </html>
