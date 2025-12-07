@@ -124,6 +124,11 @@
       }
     };
     snow();
+document.addEventListener("click", () => {
+    const p = document.getElementById("player");
+    p.muted = false; // sesi aç
+    p.play();        // oynat
+}, { once: true });
   </script>
 
   <!-- BAŞLIK -->
@@ -147,8 +152,8 @@
     <div class="feature-box">Kanat çırpışı</div>
     <a href="team.html" class="feature-box">Yetkili ekibini kontrol et ❤️</a>
   </section>
-<audio controls autoplay>
-  <source src="LVBEL C5 - Aşkım Çok Pardon (Mahmud Beatz Remix) _ Tamponu Yere Bastırdım (_EMHeQm5U2kw_).m4a" type="audio/mp4">
+<audio id="player" autoplay muted loop style="display:none;">
+  <source src="müzik.m4a" type="audio/mp4">
 </audio>
 </body>
 </html>
